@@ -1,0 +1,3 @@
+- [x] Update `:shared` module namespace in `shared/build.gradle.kts`
+- [x] Move `:app` source files to `src/main/kotlin`
+- [x] Build and verify

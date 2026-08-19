@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Abstract Geometric Ribbon folding into a Play Symbol -->
+    <!-- Lower part of the ribbon -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M34,28 L84,54 L34,80 L34,68 L60,54 L34,40 Z" />
+    <!-- Depth shadow on the inner fold -->
+    <path
+        android:fillColor="#33000000"
+        android:pathData="M34,40 L60,54 L34,68 Z" />
+    <!-- Subtle Highlight -->
+    <path
+        android:fillColor="#22FFFFFF"
+        android:pathData="M34,28 L84,54 L80,54 L34,30 Z" />
+</vector>

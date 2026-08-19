@@ -1,0 +1,29 @@
+# Task List - NewFlix CMP Implementation
+
+- [x] **Project Setup & Configuration**
+    - [x] Update `libs.versions.toml` with CMP, Ktor, Koin, Coil 3 dependencies.
+    - [x] Configure root `build.gradle.kts` and `settings.gradle.kts`.
+    - [x] Create `shared` module structure.
+    - [x] Configure `shared/build.gradle.kts` for Multiplatform (Android, iOS, Desktop).
+- [ ] **Core Infrastructure (Shared Module)**
+    - [x] Setup Koin for Dependency Injection.
+    - [x] Setup Ktor Network Client with TMDB configuration.
+    - [x] Setup Room (Multiplatform) for local storage.
+    - [x] Create Domain Models (Movie, TvShow, Cast, Trailer, Review).
+    - [ ] Define Repository Interfaces.
+- [ ] **Data Layer Implementation**
+    - [x] Implement TMDB API service with Ktor.
+    - [x] Implement Room DAOs and Mappers.
+    - [x] Implement Repository with "Offline First" logic.
+- [ ] **UI Layer (MVI + Compose Multiplatform)**
+    - [x] Setup Theme and Material 3 design system (Cine Sphere Branding).
+    - [x] Implement Home Screen (Trending, Popular, Top Rated, Now Playing).
+    - [ ] Implement Search Screen (Debounced search, Recent searches).
+    - [ ] Implement Detail Screen (Rich content, Cast, Trailers, Recommendations).
+    - [ ] Implement Favorites/Watchlist Screen.
+- [ ] **Platform Specific Integration**
+    - [ ] Update Android `app` module.
+    - [ ] Setup basic Desktop entry point.
+- [ ] **Verification**
+    - [ ] Verify build on Android.
+    - [ ] Verify offline-first behavior.

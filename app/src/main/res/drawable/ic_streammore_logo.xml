@@ -1,0 +1,70 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <group
+        android:name="logo_group"
+        android:pivotX="60"
+        android:pivotY="60">
+
+        <!-- Background Shadow -->
+        <path
+            android:fillColor="#11000000"
+            android:pathData="M35,32 L95,60 L35,88 L35,74 L75,60 L35,46 Z" />
+
+        <!-- Main Ribbon Base (Crimson) -->
+        <path
+            android:pathData="M30,30 L90,60 L30,90 L30,75 L70,60 L30,45 Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:startX="30"
+                    android:startY="30"
+                    android:endX="90"
+                    android:endY="90"
+                    android:type="linear">
+                    <item android:offset="0" android:color="#E53935" />
+                    <item android:offset="1" android:color="#B71C1C" />
+                </gradient>
+            </aapt:attr>
+        </path>
+
+        <!-- Inner Fold Shadow for 3D depth -->
+        <path
+            android:fillColor="#33000000"
+            android:pathData="M30,45 L70,60 L30,75 Z" />
+
+        <!-- Top Highlight Ribbon -->
+        <path
+            android:pathData="M30,30 L90,60 L85,60 L30,32 Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:startX="30"
+                    android:startY="30"
+                    android:endX="90"
+                    android:endY="30"
+                    android:type="linear">
+                    <item android:offset="0" android:color="#44FFFFFF" />
+                    <item android:offset="1" android:color="#00FFFFFF" />
+                </gradient>
+            </aapt:attr>
+        </path>
+
+        <!-- Glossy Finish Overlay -->
+        <path
+            android:pathData="M30,30 L90,60 L30,90 L30,75 L70,60 L30,45 Z">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:centerX="60"
+                    android:centerY="60"
+                    android:gradientRadius="45"
+                    android:type="radial">
+                    <item android:offset="0" android:color="#11FFFFFF" />
+                    <item android:offset="1" android:color="#00000000" />
+                </gradient>
+            </aapt:attr>
+        </path>
+    </group>
+</vector>

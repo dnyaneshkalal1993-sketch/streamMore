@@ -1,0 +1,14 @@
+- [ ] **Phase 1: Theming & Foundation**
+    - [ ] Update `Theme.kt` with `MidnightBlack` and Glass colors
+    - [ ] Create `GlassModifiers.kt` for frosted glass effect
+- [ ] **Phase 2: Redesigning Components**
+    - [ ] Overhaul `MovieCard.kt` to "GlassCard" style
+    - [ ] Enhance `FeaturedMovie.kt` with cinematic banner
+- [ ] **Phase 3: Screen Overhaul**
+    - [ ] Redesign `HomeScreen.kt` (Transparent Bar, Glass Sections)
+    - [ ] Redesign `DetailsScreen.kt` (Sliding Glass Panel)
+    - [ ] Redesign `SearchScreen.kt` (Minimal Glass Search)
+    - [ ] Redesign `FavoritesScreen.kt` (Glass List)
+- [ ] **Phase 4: Orchestration & Polish**
+    - [ ] Implement Floating Glass Bottom Bar in `App.kt`
+    - [ ] Final Build and Verification

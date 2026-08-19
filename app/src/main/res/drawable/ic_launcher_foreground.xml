@@ -1,0 +1,24 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Center the symbol for adaptive icon safe area -->
+    <group
+        android:translateX="0"
+        android:translateY="0"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        android:pivotX="54"
+        android:pivotY="54">
+        <path
+            android:fillColor="#E53935"
+            android:pathData="M34,28 L84,54 L34,80 L34,68 L60,54 L34,40 Z" />
+        <path
+            android:fillColor="#33000000"
+            android:pathData="M34,40 L60,54 L34,68 Z" />
+        <path
+            android:fillColor="#22FFFFFF"
+            android:pathData="M34,28 L84,54 L80,54 L34,30 Z" />
+    </group>
+</vector>
