@@ -12,7 +12,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import com.movie.newflix.MainView
 import com.movie.newflix.ui.splash.PremiumSplashScreen
 import com.movie.newflix.ui.theme.NewFlixTheme
 import com.movie.newflix.ui.theme.MidnightBlack
@@ -30,7 +29,8 @@ class MainActivity : ComponentActivity() {
             var isSplashFinished by remember { mutableStateOf(false) }
             var isComposeReady by remember { mutableStateOf(false) }
 
-            // Keep system splash ONLY until Compose is ready to take over
+            // Keep system splash screen ONLY until our custom Compose UI is ready to draw.
+            // This prevents the "black flash" between the OS splash and our animation.
             splashScreen.setKeepOnScreenCondition { !isComposeReady }
 
             NewFlixTheme {

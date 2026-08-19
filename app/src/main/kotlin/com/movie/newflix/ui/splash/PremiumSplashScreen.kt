@@ -1,20 +1,38 @@
 package com.movie.newflix.ui.splash
 
-import androidx.compose.animation.core.*
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.geometry.center
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.BlendMode
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.res.painterResource
@@ -26,6 +44,7 @@ import com.movie.newflix.R
 import kotlinx.coroutines.delay
 import kotlin.math.abs
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.milliseconds
 
 @Composable
 fun PremiumSplashScreen(
@@ -35,7 +54,7 @@ fun PremiumSplashScreen(
     val progress = remember { Animatable(0f) }
     val infiniteTransition = rememberInfiniteTransition()
     
-    // Signal that we are ready to replace the system splash
+    // Signal readiness immediately on composition
     SideEffect {
         onComposed()
     }
@@ -44,7 +63,7 @@ fun PremiumSplashScreen(
         initialValue = 0f,
         targetValue = 1f,
         animationSpec = infiniteRepeatable(
-            animation = tween(10000, easing = LinearEasing),
+            animation = tween(12000, easing = LinearEasing),
             repeatMode = RepeatMode.Restart
         )
     )
@@ -54,14 +73,14 @@ fun PremiumSplashScreen(
             targetValue = 1f,
             animationSpec = tween(3000, easing = LinearEasing)
         )
-        delay(200)
+        delay(200.milliseconds)
         onAnimationFinished()
     }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black),
+            .background(Color(0xFF010101)), // Deep near-black
         contentAlignment = Alignment.Center
     ) {
         val p = progress.value
@@ -77,8 +96,8 @@ fun PremiumSplashScreen(
             drawVignette()
             drawParticles(particleProgress)
             
-            // Scene 1: Central Red Glow
-            val glowAlpha = (p * 6f).coerceIn(0f, 1f)
+            // Scene 1: Central Red Glow - START PARTIALLY VISIBLE
+            val glowAlpha = (0.2f + p * 5f).coerceIn(0f, 1f)
             drawRadialGlow(glowAlpha)
 
             // Scene 4: Bottom Red Light
@@ -92,9 +111,9 @@ fun PremiumSplashScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Scene 2: Logo Reveal (Starts at 0.5s -> p: 0.16)
-            if (p > 0.15f) {
-                val logoProgress = ((p - 0.15f) / 0.25f).coerceIn(0f, 1f)
+            // Scene 2: Logo Reveal (Starts much earlier -> p: 0.05)
+            if (p > 0.05f) {
+                val logoProgress = ((p - 0.05f) / 0.35f).coerceIn(0f, 1f)
                 val logoAlpha = logoProgress
                 val logoScale = 0.95f + (logoProgress * 0.05f)
                 
@@ -109,12 +128,12 @@ fun PremiumSplashScreen(
                     )
                     
                     // Light Sweep
-                    if (logoProgress in 0.2f..0.8f) {
-                        val sweepP = (logoProgress - 0.2f) / 0.6f
+                    if (logoProgress in 0.1f..0.9f) {
+                        val sweepP = (logoProgress - 0.1f) / 0.8f
                         Canvas(modifier = Modifier.size(140.dp)) {
                             drawRect(
                                 brush = Brush.linearGradient(
-                                    colors = listOf(Color.Transparent, Color.White.copy(0.2f), Color.Transparent),
+                                    colors = listOf(Color.Transparent, Color.White.copy(0.3f), Color.Transparent),
                                     start = Offset(size.width * sweepP * 2f - size.width, 0f),
                                     end = Offset(size.width * sweepP * 2f, size.height)
                                 ),
@@ -128,8 +147,8 @@ fun PremiumSplashScreen(
             Spacer(modifier = Modifier.height(32.dp))
 
             // Scene 3: App Name and Tagline
-            if (p > 0.4f) {
-                val nameProgress = ((p - 0.4f) / 0.2f).coerceIn(0f, 1f)
+            if (p > 0.35f) {
+                val nameProgress = ((p - 0.35f) / 0.25f).coerceIn(0f, 1f)
                 val nameOffsetY = (12 * (1f - nameProgress)).dp
                 
                 Column(
@@ -148,8 +167,8 @@ fun PremiumSplashScreen(
                     
                     Spacer(modifier = Modifier.height(8.dp))
                     
-                    if (p > 0.46f) {
-                        val tagProgress = ((p - 0.46f) / 0.14f).coerceIn(0f, 1f)
+                    if (p > 0.42f) {
+                        val tagProgress = ((p - 0.42f) / 0.18f).coerceIn(0f, 1f)
                         val tagOffsetY = (8 * (1f - tagProgress)).dp
                         Text(
                             text = "Unlimited entertainment,\none destination.",
@@ -225,36 +244,37 @@ private fun DrawScope.drawVignette() {
 private fun DrawScope.drawRadialGlow(alpha: Float) {
     drawCircle(
         brush = Brush.radialGradient(
-            colors = listOf(Color(0xFFE53935).copy(alpha = 0.2f * alpha), Color.Transparent),
+            colors = listOf(Color(0xFFE53935).copy(alpha = 0.25f * alpha), Color.Transparent),
             center = center,
-            radius = size.width * 0.6f
+            radius = size.width * 0.7f
         )
     )
 }
 
 private fun DrawScope.drawBottomGlow(alpha: Float) {
-    val glowWidth = size.width * 0.8f
+    val glowWidth = size.width * 0.85f
     drawRect(
         brush = Brush.horizontalGradient(
-            colors = listOf(Color.Transparent, Color(0xFFFF4B4B).copy(alpha = 0.4f * alpha), Color.Transparent),
+            colors = listOf(Color.Transparent, Color(0xFFFF4B4B).copy(alpha = 0.45f * alpha), Color.Transparent),
             startX = center.x - glowWidth / 2,
             endX = center.x + glowWidth / 2
         ),
-        topLeft = Offset(0f, size.height - 2.dp.toPx()),
-        size = Size(size.width, 2.dp.toPx())
+        topLeft = Offset(0f, size.height - 3.dp.toPx()),
+        size = Size(size.width, 3.dp.toPx())
     )
 }
 
 private fun DrawScope.drawParticles(particleProgress: Float) {
     val random = Random(42)
-    for (i in 0 until 25) {
+    for (i in 0 until 30) {
         val startX = random.nextFloat() * size.width
         val startY = random.nextFloat() * size.height
         val t = (particleProgress + random.nextFloat()) % 1f
-        val x = startX + (t * 50 * (if (i % 2 == 0) 1 else -1))
-        val y = startY - (t * 100)
+        val x = startX + (t * 60 * (if (i % 2 == 0) 1 else -1))
+        val y = startY - (t * 120)
         
-        val pAlpha = 0.1f * (1f - abs(t - 0.5f) * 2)
+        // BASELINE ALPHA 0.05
+        val pAlpha = 0.05f + (0.1f * (1f - abs(t - 0.5f) * 2))
         drawCircle(
             color = Color.White,
             radius = 1.dp.toPx(),

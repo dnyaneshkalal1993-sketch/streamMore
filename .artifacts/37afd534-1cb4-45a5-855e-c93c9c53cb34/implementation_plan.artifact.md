@@ -1,41 +1,36 @@
-# Implementation Plan - Project Upload and Documentation
+# Implementation Plan - Splash Screen Visual Immediacy Fix
 
-Initialize a Git repository for the StreamMore (formerly NewFlix) project, create professional documentation, and upload it to GitHub.
+This plan addresses the perceived "black screen" delay by ensuring visuals are rendered and visible from the very first frame of the custom splash screen.
 
 ## User Review Required
 
 > [!IMPORTANT]
-> - **Remote Repository**: The project will be pushed to `https://github.com/dnyaneshkalal1993-sketch/streamMore.git`.
-> - **Authentication**: I will attempt to push using standard git commands. If the environment requires manual authentication (token/SSH), I will notify the user.
-> - **Project Renaming**: I will update the project description in README to reflect the new "StreamMore" branding.
+> - I will add a baseline visibility to the central red glow and floating particles so the screen is never purely black once the system splash hands off.
+> - I will start the logo reveal sequence earlier in the animation timeline.
+> - I will use a dark gray background (`#050505`) instead of absolute black for the first few frames to ensure the screen appears "active."
 
 ## Proposed Changes
 
-### [Component: Documentation]
+### [Component: UI - Premium Splash]
 
-#### [NEW] [README.md](file:///C:/Users/KP/AndroidStudioProjects/NewFlix/README.md)
-- **Project Name**: StreamMore
-- **Description**: A premium, cinematic OTT streaming platform built with Kotlin Multiplatform.
-- **Tech Stack**:
-    - **UI**: Compose Multiplatform (Android/iOS/Desktop)
-    - **Architecture**: Clean Architecture + MVVM
-    - **Dependency Injection**: Koin
-    - **Networking**: Ktor
-    - **Image Loading**: Coil 3
-    - **Database**: Room (KMP)
-    - **Navigation**: Jetpack Navigation Compose
-    - **Serialization**: Kotlinx Serialization
-    - **Animations**: Custom Cinematic Splash (Compose) + Android SplashScreen API
+#### [MODIFY] [PremiumSplashScreen.kt](file:///C:/Users/KP/AndroidStudioProjects/NewFlix/app/src/main/kotlin/com/movie/newflix/ui/splash/PremiumSplashScreen.kt)
+- **Visual Baseline**:
+    - Central glow will start at `0.15` alpha instead of `0`.
+    - Particles will have a minimum `0.05` alpha baseline.
+- **Timeline Adjustment**:
+    - Logo fade-in will start at `p > 0.05f` (~150ms) instead of `p > 0.15f` (~450ms).
+    - Light sweep will trigger earlier.
+- **Handoff Reliability**:
+    - Ensure `onComposed` is called only when we are ready to draw the baseline visuals.
 
-### [Component: Version Control]
+### [Component: Activity]
 
-- **Git Initialization**: `git init`
-- **Initial Commit**: Add all project files (filtered by `.gitignore`).
-- **Remote Configuration**: Add origin `https://github.com/dnyaneshkalal1993-sketch/streamMore.git`.
-- **Push**: Push to the `main` branch.
+#### [MODIFY] [MainActivity.kt](file:///C:/Users/KP/AndroidStudioProjects/NewFlix/app/src/main/kotlin/com/movie/newflix/MainActivity.kt)
+- Add a slight delay to `setKeepOnScreenCondition` to ensure the Compose engine has fully "warmed up" before removing the OS splash.
 
 ## Verification Plan
 
 ### Manual Verification
-- Confirm the `README.md` file is created and correctly lists the stack.
-- Check GitHub repository to ensure the code and commit history are present.
+- Deploy to device.
+- Verify that as soon as the system splash disappears, the red glow and particles are already visible.
+- Confirm the logo appears significantly faster than before.
