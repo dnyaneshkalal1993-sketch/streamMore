@@ -1,5 +1,3 @@
-# Tasks - Premium "StreamMore" Cinematic Splash Screen
-
 - [x] Update Home Screen Branding
     - [x] Change "CINE SPHERE" to "StreamMore" in `HomeScreen.kt`
 - [x] Create Brand Assets
@@ -14,6 +12,9 @@
 - [x] Integrate with MainActivity
     - [x] Use `setKeepOnScreenCondition` for seamless handoff
     - [x] Add state for splash completion
-- [x] Verification
-    - [x] Build and Run
-    - [x] Verify animation timing and visual quality
+- [ ] Fix Visual Immediacy
+    - [ ] Update `PremiumSplashScreen.kt` with baseline alpha and earlier logo reveal
+    - [ ] Refine `MainActivity.kt` handoff logic
+- [ ] Verification
+    - [ ] Build and Run
+    - [ ] Verify animation starts with visible elements

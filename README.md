@@ -25,6 +25,15 @@ StreamMore is a modern, luxury-tier OTT streaming platform application built usi
 *   **Immersive Details**: High-resolution posters and integrated action bars.
 *   **Search & Favorites**: Easily find content and manage your personal watchlist.
 
+## 📸 Screenshots
+| Splash Screen | Login | Sign Up |
+| --- | --- | --- |
+| <img src="screenshots/splash_screen.png" width="250"> | <img src="screenshots/login_screen.png" width="250"> | <img src="screenshots/signup_screen.png" width="250"> |
+
+| Home Screen | Movie Details | My List |
+| --- | --- | --- |
+| <img src="screenshots/home_screen.png" width="250"> | <img src="screenshots/movie_details.png" width="250"> | <img src="screenshots/my_list.png" width="250"> |
+
 ## 🏗️ Architecture
 The project follows **Clean Architecture** principles combined with the **MVVM (Model-View-ViewModel)** pattern:
 *   **data**: Implementation of repositories, local database, and remote API calls.
